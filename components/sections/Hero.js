@@ -16,7 +16,7 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="text-xs sm:text-sm uppercase tracking-widest text-foreground/60 mb-4 sm:mb-5"
         >
-          "Designing Digital Experiences, One Pixel at a Time."
+          Designing Digital Experiences, One Pixel at a Time.
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
