@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Contact() {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -15,11 +17,13 @@ export default function Contact() {
       const fd = new FormData(form);
 
       // Web3Forms requirements
+      const phone = (fd.get("phone") || "").toString().trim();
       const payload = {
         access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "a1f5cea6-b3a5-4a98-bcef-aa34de4d52ed",
         name: fd.get("name"),
         email: fd.get("email"),
         message: fd.get("message"),
+        phone,
         subject: `Portfolio contact from ${fd.get("name")}`,
         from_name: fd.get("name"),
         from_email: fd.get("email"),
@@ -41,7 +45,10 @@ export default function Contact() {
         throw new Error(data.message || "Failed to send");
       }
 
-      setStatus("success");
+  setStatus("success");
+  // show fun popup toast
+  setShowToast(true);
+  setTimeout(() => setShowToast(false), 3500);
       form.reset();
     } catch (err) {
       setStatus("error");
@@ -51,8 +58,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="scroll-mt-24 snap-start snap-always mt-16 pt-10 border-t border-strong">
-  <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Hit Me Up!😶‍🌫️</h2>
-      <p className="mt-1 text-sm text-foreground/70">Let’s chat! and if you wanna build something together, thats cool too!.</p>
+  <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">Hit Me Up! 😶‍🌫️</h2>
+      <p className="mt-3 text-sm text-foreground/70">Let’s chat! and if you wanna build something together, thats cool too!.</p>
 
       {/* Form */}
       <form onSubmit={onSubmit} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-10">
@@ -99,7 +106,7 @@ export default function Contact() {
             placeholder="Write your message here..."
             rows={8}
             required
-            className="bg-transparent w-full border-0 border-b border-strong rounded-none px-0 py-2 text-sm outline-none focus:ring-0 placeholder:text-foreground/40 min-h-[9rem]"
+            className="bg-transparent w-full border-0 border-b border-strong rounded-none px-0 py-2 text-sm outline-none focus:ring-0 placeholder:text-foreground/40 min-h-[13rem]"
           />
           <div className="mt-6 flex justify-end">
             <button
@@ -110,14 +117,45 @@ export default function Contact() {
               {status === "loading" ? "Sending..." : "Send"}
             </button>
           </div>
-          {status === "success" && (
-            <p className="mt-3 text-sm text-green-600 dark:text-green-400">Message sent! I’ll get back to you soon.</p>
-          )}
+          {/* success popup handled by toast below */}
           {status === "error" && (
             <p className="mt-3 text-sm text-red-600 dark:text-red-400">{error}</p>
           )}
         </div>
       </form>
+
+      {/* Fun success toast */}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            key="contact-success-toast"
+            initial={{ y: 40, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 40, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed bottom-6 right-6 z-50"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="flex items-center gap-3 rounded-xl border border-black/[.12] dark:border-white/[.14] bg-background/95 backdrop-blur px-4 py-3 shadow-lg">
+              <span aria-hidden className="text-xl">🎉</span>
+              <div>
+                <div className="text-sm font-semibold">Message sent!</div>
+                <div className="text-xs text-foreground/70">Thanks for reaching out — I’ll reply soon.</div>
+              </div>
+              <button
+                type="button"
+                onClick={() => { setShowToast(false); setStatus("idle"); }}
+                className="ml-2 inline-flex h-7 w-7 items-center justify-center rounded-md hover:bg-black/5 dark:hover:bg-white/10"
+                aria-label="Dismiss"
+                title="Dismiss"
+              >
+                ×
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

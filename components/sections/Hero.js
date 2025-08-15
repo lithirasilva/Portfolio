@@ -7,7 +7,7 @@ export default function Hero() {
   const hasWave = siteConfig.name?.includes("👋");
   const baseName = hasWave ? siteConfig.name.replace("👋", "").trim() : siteConfig.name;
   return (
-  <section id="home" className="text-center sm:text-left grid grid-cols-1 md:grid-cols-[1.25fr_1fr] items-center gap-14 sm:gap-16 snap-start snap-always">
+  <section id="home" className="text-center sm:text-left grid grid-cols-1 md:grid-cols-[1.25fr_1fr] items-start gap-12 sm:gap-14 snap-start snap-always">
       <div>
         <motion.p
           initial={{ opacity: 0, y: 8 }}
@@ -16,14 +16,14 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
           className="text-xs sm:text-sm uppercase tracking-widest text-foreground/60 mb-4 sm:mb-5"
         >
-          UI-focused Frontend Developer
+          "Designing Digital Experiences, One Pixel at a Time."
         </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ delay: 0.05, duration: 0.6 }}
-          className="display-accent text-4xl sm:text-6xl font-bold tracking-tight flex items-center justify-center sm:justify-start gap-2"
+          className="display-accent text-4xl sm:text-6xl font-bold tracking-tight flex items-center justify-center sm:justify-start gap-2 mt-2"
         >
           {baseName}
           {hasWave && (
@@ -47,7 +47,7 @@ export default function Hero() {
           transition={{ delay: 0.1, duration: 0.6 }}
           className="mt-6 sm:mt-7 text-base sm:text-lg leading-relaxed sm:leading-8 text-foreground/80 max-w-2xl mx-auto sm:mx-0"
         >
-          I craft clean, fast, and accessible web experiences with Next.js and Tailwind—balancing design and code to ship polished interfaces.
+          I’m a Com Sci Undergrad with a passion for UI/UX design. I craft user-friendly, visually engaging digital products, and I’m always learning how to make every interaction intuitive and delightful. (more to come soon)
         </motion.p>
         <motion.ul
           initial={{ opacity: 0, y: 8 }}
@@ -70,13 +70,13 @@ export default function Hero() {
             href="#projects"
             className="inline-flex items-center justify-center rounded-lg bg-foreground text-background px-5 py-3 text-sm font-medium transition hover:opacity-90 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/45"
           >
-            See Work
+            View my work
           </a>
           <a
             href="#contact"
             className="inline-flex items-center justify-center rounded-lg border border-black/[.14] dark:border-white/[.18] px-5 py-3 text-sm font-medium transition hover:bg-black/[.04] dark:hover:bg-white/[.06] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/45 dark:focus-visible:ring-cyan-400/40"
           >
-            Get in Touch
+            Lets connect!
           </a>
         </motion.div>
       </div>

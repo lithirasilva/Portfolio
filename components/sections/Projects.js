@@ -3,14 +3,7 @@ import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
 
 export default function Projects() {
-  function onMove(e) {
-    const el = e.currentTarget;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty("--mx", `${x}px`);
-    el.style.setProperty("--my", `${y}px`);
-  }
+  // hover effects handled via CSS (no mouse tracking needed)
 
   return (
     <section id="projects" className="scroll-mt-24 snap-start snap-always">
@@ -22,31 +15,21 @@ export default function Projects() {
           <motion.article
             key={p.title}
             tabIndex={0}
-            onMouseMove={onMove}
             initial={{ opacity: 0, y: 12, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: false, amount: 0.2, margin: "-80px" }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            className="group relative rounded-2xl border bg-background/90 p-5 overflow-hidden outline-none transition shadow-sm border-black/[.16] dark:border-white/[.16] hover:shadow-md hover:-translate-y-0.5 focus-visible:shadow-md focus-visible:ring-2 focus-visible:ring-indigo-400/40 dark:focus-visible:ring-cyan-400/35"
+              className="group relative rounded-2xl border bg-background/90 p-5 overflow-hidden outline-none transition-all duration-300 ease-out shadow-sm border-black/[.16] dark:border-white/[.16] focus-visible:shadow-md focus-visible:ring-2 focus-visible:ring-indigo-400/40 dark:focus-visible:ring-cyan-400/35"
           >
-            {/* Cursor-reactive glow (light) - indigo */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-              style={{
-                background:
-                  "radial-gradient(420px circle at var(--mx) var(--my), rgba(99,102,241,0.20), transparent 45%)",
-              }}
-            />
-            {/* Dark mode stronger glow (cyan) */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 hidden dark:block"
-              style={{
-                background:
-                  "radial-gradient(420px circle at var(--mx) var(--my), rgba(34,211,238,0.28), transparent 45%)",
-              }}
-            />
+            {/* Cartoon-like offset shadow via box-shadow on hover (see className) */}
+              {/* Simple gradient glow shadow */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-2 rounded-3xl opacity-0 blur-xl transition-opacity duration-300
+                           bg-gradient-to-br from-indigo-500/18 via-fuchsia-500/14 to-cyan-400/18
+                           dark:from-cyan-400/18 dark:via-sky-500/14 dark:to-indigo-500/18
+                           group-hover:opacity-100"
+              />
 
             <div className="relative z-10">
               <div className="h-40 rounded-md border border-black/[.12] dark:border-white/[.12] bg-gradient-to-br from-black/[.04] to-transparent dark:from-white/[.06]" />

@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function About() {
   return (
     <section id="about" className="scroll-mt-24 snap-start snap-always">
-      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight">About</h2>
+      <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight"></h2>
 
       <div className="mt-6 grid gap-8 md:grid-cols-[1.5fr_1fr] items-start">
         {/* Intro + details (left) */}
@@ -17,7 +17,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
         >
           <h3 className="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight">
-            I design interfaces and build them into fast, accessible products.
+           Hi, I’m Lithira 🤓 Designing the ‘<span className="display-accent">wow</span>’ and coding the ‘<span className="display-accent">how</span>’
           </h3>
           <p className="mt-4 text-foreground/80">
             {siteConfig.title}

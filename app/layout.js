@@ -4,7 +4,6 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import Preloader from "@/components/ui/Preloader";
 import BackgroundFX from "@/components/ui/BackgroundFX";
 import Footer from "@/components/ui/Footer";
-import CustomCursor from "@/components/ui/CustomCursor";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -28,19 +27,31 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth scroll-pt-16 md:scroll-pt-20">
   <body className={`${notoSans.variable} ${notoSerif.variable} ${playwrite.variable} antialiased snap-y snap-mandatory`}>
-        <Preloader />
-        <CustomCursor />
+  <Preloader />
         <BackgroundFX />
         {/* Minimal Header */}
         <header className="sticky top-0 z-50 backdrop-blur border-b border-black/[.06] dark:border-white/[.12] bg-background/70">
           <div className="max-w-5xl mx-auto flex items-center justify-between px-6 py-3">
             <a href="#home" className="font-semibold tracking-tight">LS</a>
             <div className="flex items-center gap-2 sm:gap-3 text-sm">
-              <a href="#about" className="hidden sm:inline hover:opacity-80">About</a>
-              <a href="#projects" className="hidden sm:inline hover:opacity-80">Work</a>
-              <a href="#contact" className="hidden sm:inline hover:opacity-80">Contact</a>
+              <a href="#about" className="hidden sm:inline group relative inline-flex items-center px-2 py-1 rounded-md">
+                <span className="relative z-10">About</span>
+                <span aria-hidden className="pointer-events-none absolute -inset-1 rounded-md opacity-0 blur-md transition-opacity duration-300 bg-gradient-to-br from-indigo-500/18 via-fuchsia-500/14 to-cyan-400/18 dark:from-cyan-400/18 dark:via-sky-500/14 dark:to-indigo-500/18 group-hover:opacity-100" />
+              </a>
+              <a href="#experience" className="hidden sm:inline group relative inline-flex items-center px-2 py-1 rounded-md">
+                <span className="relative z-10">Experience</span>
+                <span aria-hidden className="pointer-events-none absolute -inset-1 rounded-md opacity-0 blur-md transition-opacity duration-300 bg-gradient-to-br from-indigo-500/18 via-fuchsia-500/14 to-cyan-400/18 dark:from-cyan-400/18 dark:via-sky-500/14 dark:to-indigo-500/18 group-hover:opacity-100" />
+              </a>
+              <a href="#projects" className="hidden sm:inline group relative inline-flex items-center px-2 py-1 rounded-md">
+                <span className="relative z-10">Work</span>
+                <span aria-hidden className="pointer-events-none absolute -inset-1 rounded-md opacity-0 blur-md transition-opacity duration-300 bg-gradient-to-br from-indigo-500/18 via-fuchsia-500/14 to-cyan-400/18 dark:from-cyan-400/18 dark:via-sky-500/14 dark:to-indigo-500/18 group-hover:opacity-100" />
+              </a>
+              <a href="#contact" className="hidden sm:inline group relative inline-flex items-center px-2 py-1 rounded-md">
+                <span className="relative z-10">Contact</span>
+                <span aria-hidden className="pointer-events-none absolute -inset-1 rounded-md opacity-0 blur-md transition-opacity duration-300 bg-gradient-to-br from-indigo-500/18 via-fuchsia-500/14 to-cyan-400/18 dark:from-cyan-400/18 dark:via-sky-500/14 dark:to-indigo-500/18 group-hover:opacity-100" />
+              </a>
               {/* Social icons */}
               <a
                 href="https://github.com/lithirasilva"

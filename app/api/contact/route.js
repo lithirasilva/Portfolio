@@ -4,7 +4,7 @@ export const runtime = "nodejs";
 
 export async function POST(request) {
   try {
-    const { name, email, message } = await request.json();
+  const { name, email, message, phone } = await request.json();
 
     if (!name || !email || !message) {
       return Response.json({ ok: false, error: "Missing fields" }, { status: 400 });
@@ -28,7 +28,7 @@ export async function POST(request) {
       to,
       subject: `Portfolio contact from ${name}`,
       reply_to: email,
-      text: `From: ${name} <${email}>\n\n${message}`,
+      text: `From: ${name} <${email}>${phone ? `\nPhone: ${phone}` : ''}\n\n${message}`,
     });
 
     if (error) {
